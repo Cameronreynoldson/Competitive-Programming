@@ -1,0 +1,35 @@
+
+public class recursion {
+
+	public static void main(String[] args){
+		int[] array = new int[5];
+		for(int i = 0; i<5;++i) array[i] = i+1;
+		permute(array,5,0);
+	}
+
+	
+	public static void swap(int[] array, int i, int j){
+		int temp;
+		temp = array[i];
+		array[i] = array[j];
+		array[j] = temp;
+	}
+
+	
+	public static void permute(int[] array,int n, int i){	
+		int j; 
+		if(i == n){
+			for(int index = 0; index<n;++index){
+				System.out.print(array[index]);
+			}
+			System.out.println();
+		}
+		else{
+			for(j = i; j < n;++j){
+				swap(array,i,j);
+				permute(array,n,i+1);
+				swap(array,i,j);
+			}
+		}		
+	}
+}
