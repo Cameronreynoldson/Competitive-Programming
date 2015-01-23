@@ -1,0 +1,104 @@
+import java.util.Arrays; 
+
+
+public class MinHeap
+{
+	public int min;
+	public int size; 
+	public int[] heap;
+
+
+	public MinHeap(int[] btree)
+	{
+		heap = btree;
+	}
+
+	public void heapify(int index) //starts at root
+	{
+		int left = 2*i+1;
+		int right = 2*i+2; 
+		int min = index; 
+		int temp; 
+
+		if(heap[left] < heap[index])
+		{
+			min = left; 
+		}
+
+		if(heap[right] < heap[min])
+		{
+			min = right; 
+		}
+
+		if(min != i)
+		{
+			//swap
+			temp = heap[i];
+			heap[i] = heap[min];
+			heap[min] = i;
+			heapify(min);
+		}
+
+	}
+
+
+	public void makeMinHeap(int index)
+	{
+		for(int i = size/2; i >= 0; ++i)
+		{
+			heapify(i); 
+		}
+
+	}
+
+	public void insert(int value)
+	{
+		if(size >= heap.length-1)
+		{
+			System.out.println("heap is full");
+		}
+		else
+		{
+			size++;
+			int index = size-1; 
+			while(heap[index] < heap[(index-1)/2])
+			{
+				heap[index] = heap[(index-1)/2];
+				index = (index-1)/2;
+			}
+
+			heap[index] = value; 
+		}
+
+	}
+
+	public int extractMin()
+	{
+		if(size < 1)
+		{
+			System.out.println("heap is empty")
+			return -1; 
+		}
+		else
+		{
+			tempMin = heap[0];
+			heap[0] = heap[size-1];
+			heap[size-1] = -1; 
+			size--;
+			heapify(0);
+			return tempMin; 
+		}
+	}
+
+	public void sort()
+	{
+		int[] sorted = new int[size];
+		int tempSize = size; 
+		for(int i = 0; i < tempSize; ++i)
+		{
+			sorted[i] = extractMin();
+		}
+		System.out.println(Arrays.toString(sorted));
+	}
+
+}
