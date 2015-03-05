@@ -1,0 +1,47 @@
+
+
+public class MinCoinChange 
+
+{
+
+	public static void main(String[] args)
+	{
+		int[] coins = {1,2,3};
+		System.out.println(minChange(coins,6));
+	}
+	
+	public static int minChange(int[] coins, int sum)
+	{
+		int[] table = new int[sum+1];
+		
+		int numCoins = 0; 
+		
+		table[0] = 0;
+		
+		for(int i = 1; i <= sum; ++i)
+		{
+			numCoins = Integer.MAX_VALUE;
+			
+			for(int j = 0; j < coins.length; ++j)
+			{
+				if(coins[j] <= i)
+				{
+					numCoins = Math.min(numCoins,table[i-coins[j]]);
+				}
+			}
+			
+			if(numCoins < Integer.MAX_VALUE)
+			{
+				table[i] = numCoins+1; 
+			}
+			else
+			{
+				table[i] = Integer.MAX_VALUE;
+			}
+			
+		}
+		
+		return table[sum];
+	}
+	
+}
